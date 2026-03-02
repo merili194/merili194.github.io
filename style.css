@@ -566,7 +566,19 @@ body { background: var(--cream); color: var(--black); font-family: var(--body); 
   line-height: 1; pointer-events: none; user-select: none;
   letter-spacing: -.02em;
 }
-.contact-inner { padding: 80px 40px; flex: 1; position: relative; z-index: 1; }
+.contact-inner {
+  padding: 80px 40px;
+  flex: 1;
+  position: relative;
+  z-index: 1;
+  /* keep the LET’S WORK block centered in the view */
+  margin: auto 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .contact-label {
   font-family: var(--ui); font-size: 11px; font-weight: 500;
   letter-spacing: .2em; color: var(--pink);
@@ -656,10 +668,12 @@ div.modal-gallery-img { min-width: 300px; background: #222; }
   body { cursor: auto; }
   .cursor, .cursor-ring { display: none; }
   .hero-main { grid-template-columns: 1fr; }
-  .hero-right { min-height: 60vw; }
+  /* image first on mobile */
+  .hero-right { order: -1; min-height: 60vw; }
   .hero-left { min-height: 320px; }
-  .about-grid { grid-template-columns: 1fr; }
-  .about-left { border-right: none; border-bottom: 2px solid var(--black); padding: 40px 24px; }
+  /* keep text and picture side-by-side on narrow screens */
+  .about-grid { grid-template-columns: 1fr 1fr; }
+  .about-left { border-right: 2px solid var(--black); border-bottom: none; padding: 40px 24px; }
   .about-right { padding: 40px 24px; min-height: 400px; }
   .services-inner { grid-template-columns: 1fr 1fr; }
   .work-header { padding: 32px 24px 24px; }
@@ -684,4 +698,26 @@ div.modal-gallery-img { min-width: 300px; background: #222; }
   .contact-title { font-size: clamp(3rem, 16vw, 6rem); }
   .contact-links { flex-direction: column; gap: 8px; }
   .hero-name-top { font-size: clamp(2.5rem, 12vw, 5rem); }
+}
+
+/* Desktop (vaikimisi stiilid) */
+.container {
+  display: flex;
+  gap: 40px;
+}
+
+.card {
+  width: 300px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .card {
+    width: 100%;
+  }
 }
