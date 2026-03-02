@@ -669,8 +669,17 @@ div.modal-gallery-img { min-width: 300px; background: #222; }
   .cursor, .cursor-ring { display: none; }
   .hero-main { grid-template-columns: 1fr; }
   /* image first on mobile */
-  .hero-right { order: -1; min-height: 60vw; }
-  .hero-left { min-height: 320px; }
+  .hero-right { order: -1; min-height: 100vw; }
+  .hero-left { min-height: 320px; justify-content: center; }
+  .hero-left, .hero-right { text-align: center; padding: 20px; }
+
+  /* make sure portrait shows more face on small screens */
+  .hero-image img { object-position: center 70%; }
+
+  /* tighten hero text spacing on narrow screens */
+  .hero-name-top { font-size: clamp(2.2rem, 10vw, 4rem); }
+  .hero-name-script { margin-top: 4px; font-size: clamp(1.6rem, 4.5vw, 3.5rem); }
+
   /* keep text and picture side-by-side on narrow screens */
   .about-grid { grid-template-columns: 1fr 1fr; }
   .about-left { border-right: 2px solid var(--black); border-bottom: none; padding: 40px 24px; }
@@ -698,6 +707,9 @@ div.modal-gallery-img { min-width: 300px; background: #222; }
   .contact-title { font-size: clamp(3rem, 16vw, 6rem); }
   .contact-links { flex-direction: column; gap: 8px; }
   .hero-name-top { font-size: clamp(2.5rem, 12vw, 5rem); }
+
+  /* reduce script text spacing for tight screens */
+  .hero-name-script { margin-top: -4px; font-size: clamp(1.8rem, 5vw, 4.2rem); }
 }
 
 /* Desktop (vaikimisi stiilid) */
