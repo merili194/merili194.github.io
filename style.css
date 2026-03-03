@@ -44,9 +44,10 @@ body { background: var(--cream); color: var(--black); font-family: var(--body); 
   border: 1.5px solid var(--pink); border-radius: 50%;
   pointer-events: none; z-index: 99998;
   transform: translate(-50%, -50%);
-  transition: width .3s, height .3s, opacity .3s;
+  transition: width .3s, height .3s, opacity .3s, border-color .2s;
   will-change: transform; opacity: 0.5;
 }
+
 .cursor.hov { width: 18px; height: 18px; background: var(--black); }
 .cursor-ring.hov { width: 56px; height: 56px; opacity: 0.2; border-color: var(--black); }
 
@@ -347,7 +348,7 @@ body { background: var(--cream); color: var(--black); font-family: var(--body); 
   color: var(--pink); font-size: 20px;
 }
 .portrait-img {
-  width: 320px; aspect-ratio: 3/4; overflow: hidden;
+  width: 520px; aspect-ratio: 3/4; overflow: hidden;
   position: relative; z-index: 2;
   outline: 3px solid var(--black); outline-offset: 6px;
 }
@@ -473,7 +474,7 @@ body { background: var(--cream); color: var(--black); font-family: var(--body); 
 .work-item:hover .work-overlay { opacity: 1; }
 .work-cat {
   font-family: var(--ui); font-size: 9px; font-weight: 500;
-  letter-spacing: .2em; color: rgba(255,255,255,.75);
+  letter-spacing: .2em; color: var(--black);
   text-transform: uppercase; margin-bottom: 6px;
 }
 .work-overlay h4 {
@@ -511,14 +512,7 @@ body { background: var(--cream); color: var(--black); font-family: var(--body); 
   background: var(--black);
   position: relative; overflow: hidden;
 }
-.edu-left::before {
-  content: 'EDU';
-  position: absolute; bottom: -20px; left: -10px;
-  font-family: var(--display);
-  font-size: clamp(6rem, 14vw, 16rem);
-  color: rgba(255,255,255,.04);
-  line-height: 1; pointer-events: none;
-}
+
 .portrait-wrap.small { position: relative; }
 .red-dot.small-dot {
   width: 28px; height: 28px; top: -10px; left: -10px;
@@ -547,9 +541,10 @@ body { background: var(--cream); color: var(--black); font-family: var(--body); 
   font-family: var(--display); font-size: .95rem;
   letter-spacing: .08em; text-transform: uppercase;
 }
-.edu-row span { color: var(--muted); font-family: var(--body); font-size: .82rem; font-weight: 300; }
+.edu-row span { color: var(--muted); font-family: var(--body); font-size: .82rem; font-weight: 400; }
 .edu-item p { font-size: .875rem; color: #555; line-height: 1.7; }
 
+.strong { font-weight: 200; color: var(--black); }
 /* ═══════ CONTACT ═══════ */
 .contact {
   background: var(--black);
@@ -559,7 +554,7 @@ body { background: var(--cream); color: var(--black); font-family: var(--body); 
 /* Big BG text */
 .contact::before {
   content: "LET'S";
-  position: absolute; top: -4%; left: -2%;
+  position: absolute; top: -4%; left: 15%;
   font-family: var(--display);
   font-size: clamp(10rem, 22vw, 28rem);
   color: rgba(255,255,255,.03);

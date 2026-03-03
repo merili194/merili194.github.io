@@ -1,13 +1,69 @@
 // =============================================
-//  SCROLL TO TOP ON LOAD (must stay at top)
+//  SCROLL TO TOP ON LOAD
 // =============================================
 if ('scrollRestoration' in history) {
   history.scrollRestoration = 'manual';
 }
-
 window.addEventListener('load', () => {
   setTimeout(() => window.scrollTo({ top: 0, left: 0, behavior: 'instant' }), 0);
 });
+
+// =============================================
+//  ALL PROJECT DATA — edit here only
+// =============================================
+const projects = [
+  {
+    id: 'kringel',
+    title: 'Website for creating, solving and grading tests',
+    cat: 'WEB DESIGN',
+    year: 'Web Design · 2025',
+    desc: 'This project was a semester-long school assignment to design a website for creating, solving and grading tests for studenKringel was a web based platform developed for Tallinn University Science Kitchen. The goal of the project was to create a comprehensive web solution that allows users to create tests with a wide variety of question types, complete them within the same environment, and later evaluate and grade the results all on a single. The project was completed as a semester long team assignment. As the Project Manager, I was responsible for coordinating the team, organizing workflows, and ensuring timely delivery of milestones. In addition to team leadership, I played a key role in designing a high fidelity prototype in Figma, defining the user experience and visual direction of the platform. I was also actively involved in frontend development and contributed to the project documentation.\nThe development process included user research, wireframing, prototyping, and visual design. The final solution was designed to be intuitive, user friendly, and accessible for both students and teachers, providing a seamless experience for creating, solving, and grading tests.ts and teachers. The project included user research, wireframing, prototyping and visual design. The website was designed to be user-friendly and accessible for both students and teachers.',
+    link: 'https://github.com/Merili-t/Kringel',
+    images: ['images/figma-kringel.png','images/detailid.png','images/guide.png','images/koik_testid.png','images/koik_vastused.png','images/koostamine.png','images/solving.png'],
+  },
+  {
+    id: 'coca-cola',
+    title: 'Coca-Cola Onepager',
+    cat: 'WEB DESIGN',
+    year: 'Web Design · 2026',
+    desc: 'A self-initiated concept project. I wanted to try something different and play with a futuristic aesthetic, exploring how product photography principles within web design, using lighting, depth and motion, can make something as familiar as a Coca-Cola can feel like a luxury object.',
+    images: ['images/coca-cola.png', 'images/coke1.png', 'images/coke2.png', 'images/coke3.png'],
+    link: null,
+  },
+  {
+    id: 'kultuuriklubi',
+    title: 'TLÜ Kultuuriklubi',
+    cat: 'SOCIAL MEDIA & BRANDING',
+    year: 'Social Media · 2025–2026',
+    desc: 'Visual identity and social media content for TLÜ Kultuuriklubi — event graphics, Instagram posts, stories and promotional materials created to build a cohesive brand presence across all club events.',
+    link: 'https://www.instagram.com/kultuuriklubitlu/',
+    images: ['images/kulta/insta.png','images/kulta/dj.png','images/kulta/malumang.png','images/kulta/sobrapaev.png','images/kulta/sobrapaev2.png','images/kulta/tickets.png','images/kulta/vastlapaev.png','images/kulta/bar.jpg'],
+  },
+  {
+    id: 'zine',
+    title: 'Zine Poster',
+    cat: 'POSTERS',
+    year: 'Poster · 2025',
+    desc: 'A poster created for a local zine, exploring themes of identity and self-expression through bold typography and vibrant colors.',
+    images: ['images/poster/zine.png','images/poster/zine/zine_1.png','images/poster/zine/zine_2.png','images/poster/zine/zine_3.png','images/poster/zine/zine_4.png','images/poster/zine/zine_5.png','images/poster/zine/zine_6.png','images/poster/zine/zine_7.png','images/poster/zine/zine_8.png'],
+  },
+  {
+    id: 'bmw',
+    title: 'BMW Configurator',
+    cat: 'WEB DESIGN',
+    year: 'Web Design · 2024',
+    desc: 'A web application for configuring BMW vehicles, featuring an intuitive interface and real-time visualization of vehicle options.',
+    images: ['images/bmw/home.png','images/bmw/specs.png','images/bmw/configure.png','images/bmw/pics.png'],
+  },
+  {
+    id: 'posters-for-fun',
+    title: 'Posters for Fun',
+    cat: 'POSTERS',
+    year: 'Posters · 2025',
+    desc: 'I made these in between everything else, just messing around with type and colour when I felt like it. No deadline, no feedback, no stress.',
+    images: ['images/poster/mind.png','../../roast_levels.png','../../bored.png','../../scared.png'],
+  },
+];
 
 // =============================================
 //  CONSOLE TEXT EFFECT (about section name)
@@ -103,7 +159,6 @@ const aboutDateEl = document.getElementById('about-date');
 if (todayDateEl) todayDateEl.textContent = todayStr;
 if (aboutDateEl) aboutDateEl.textContent = todayStr;
 
-
 // =============================================
 //  WORK FILTER
 // =============================================
@@ -183,24 +238,17 @@ window.addEventListener('scroll', () => {
 //  CURSOR DOT (desktop only)
 // =============================================
 if (window.innerWidth > 900) {
-  const dot = document.createElement('div');
-  dot.style.cssText = `
-    position: fixed;
-    width: 10px;
-    height: 10px;
-    background: #ff2d78;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    transition: transform 0.1s ease, background 0.2s ease, opacity 0.15s ease;
-  `;
-  document.body.appendChild(dot);
+  const dot  = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
 
   let mx = 0, my = 0, cx = 0, cy = 0;
+  let isHeroLeft = false;
 
   window.addEventListener('mousemove', e => {
     mx = e.clientX;
     my = e.clientY;
+    ring.style.left = mx + 'px';
+    ring.style.top  = my + 'px';
   });
 
   function animateDot() {
@@ -222,16 +270,53 @@ if (window.innerWidth > 900) {
     el.addEventListener('mouseleave', () => dot.style.transform = 'scale(1)');
   });
 
+  document.querySelectorAll('.hero-left').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      isHeroLeft = true;
+      dot.style.background  = '#0a0a0a';
+      ring.style.borderColor = '#0a0a0a';
+    });
+    el.addEventListener('mouseleave', () => {
+      isHeroLeft = false;
+      dot.style.background  = '#ff2d78';
+      ring.style.borderColor = '#ff2d78';
+    });
+  });
+
+  document.querySelectorAll('.skills-ticker').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      dot.style.background   = '#0a0a0a';
+      ring.style.borderColor = '#0a0a0a';
+    });
+    el.addEventListener('mouseleave', () => {
+      dot.style.background   = '#ff2d78';
+      ring.style.borderColor = '#ff2d78';
+    });
+  });
+
+  document.querySelectorAll('.edu-left').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      dot.style.background   = '#ff2d78';
+      ring.style.borderColor = '#ff2d78';
+    });
+    el.addEventListener('mouseleave', () => {
+      dot.style.background   = '#0a0a0a';
+      ring.style.borderColor = '#0a0a0a';
+    });
+  });
+
   const lightSections = document.querySelectorAll('.work, .about, .education');
   const darkSections  = document.querySelectorAll('.hero, .services, .contact');
 
   const colorObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
+      if (isHeroLeft) return;
       const isDark = entry.target.classList.contains('services') ||
                      entry.target.classList.contains('contact') ||
                      entry.target.classList.contains('hero');
-      dot.style.background = isDark ? '#ff2d78' : '#0a0a0a';
+      dot.style.background   = isDark ? '#ff2d78' : '#0a0a0a';
+      ring.style.borderColor = isDark ? '#ff2d78' : '#0a0a0a';
     });
   }, { threshold: 0.4 });
 
@@ -241,104 +326,7 @@ if (window.innerWidth > 900) {
 
 // =============================================
 //  PROJECT MODAL
-//  Reads data-* attributes directly from HTML
-//  so adding new projects needs no JS changes.
-//
-//  Required on .work-item:
-//    data-title, data-cat, data-year, data-desc
-//    data-link  (optional, defaults to #)
-//    data-images (comma-separated image paths)
-//
-//  Falls back to legacy projects{} object if
-//  data-title is absent, for backwards compat.
 // =============================================
-
-const legacyProjects = {
-  'project-2': {
-    title:  'Coca-Cola onepager',
-    cat:    'WEB DESIGN',
-    year:   'Web Design · 2026',
-    desc:   'Short project description goes here.',
-    link:   '#',
-    photos: ['images/coca-cola.png']
-  },
-  'project-3': {
-    title:  'Project Title Three',
-    cat:    'POSTERS',
-    year:   'Poster · 2024',
-    desc:   'Short project description goes here.',
-    link:   '#',
-    photos: []
-  },
-  'project-4': {
-    title:  'Project Title Four',
-    cat:    'PHOTOGRAPHY',
-    year:   'Photography · 2024',
-    desc:   'Short project description goes here.',
-    link:   '#',
-    photos: []
-  },
-  'project-5': {
-    title:  'Project Title Five',
-    cat:    'WEB DESIGN',
-    year:   'Web Design · 2024',
-    desc:   'Short project description goes here.',
-    link:   '#',
-    photos: []
-  },
-  'project-6': {
-    title:  'Project Title Six',
-    cat:    'BRANDING',
-    year:   'Branding · 2024',
-    desc:   'Short project description goes here.',
-    link:   '#',
-    photos: []
-  },
-  'project-7': {
-    title:  'Project Title Seven',
-    cat:    'POSTERS',
-    year:   'Poster · 2023',
-    desc:   'Short project description goes here.',
-    link:   '#',
-    photos: []
-  },
-  'project-8': {
-    title:  'Project Title Eight',
-    cat:    'PHOTOGRAPHY',
-    year:   'Photography · 2023',
-    desc:   'Short project description goes here.',
-    link:   '#',
-    photos: []
-  },
-  'project-9': {
-    title:  'Project Title Nine',
-    cat:    'WEB DESIGN',
-    year:   'Web Design · 2023',
-    desc:   'Short project description goes here.',
-    link:   '#',
-    photos: []
-  },
-};
-
-// Kringel project kept in JS due to many images
-const kringelData = {
-  title:  'Testiloomis, täitmise ja hindamise keskkond',
-  cat:    'WEB DESIGN',
-  year:   'Web Design · 2025',
-  desc:   'Write a short description of this project here. What was the brief, your approach, and the outcome? Two to four sentences works well.',
-  link:   '#',
-  photos: [
-    'images/figma-kringel.png',
-    'images/detailid.png',
-    'images/guide.png',
-    'images/koik_testid.png',
-    'images/koik_vastused.png',
-    'images/koostamine.png',
-    'images/solving.png',
-  ]
-};
-
-// ── MODAL ELEMENTS ────────────────────────────
 const modal        = document.getElementById('projectModal');
 const modalClose   = document.getElementById('modalClose');
 const modalGallery = document.getElementById('modalGallery');
@@ -348,12 +336,12 @@ const modalYear    = document.getElementById('modalYear');
 const modalDesc    = document.getElementById('modalDesc');
 const modalLink    = document.getElementById('modalLink');
 
-function buildGallery(photos) {
+function buildGallery(images) {
   modalGallery.innerHTML = '';
-  photos.forEach(src => {
+  images.forEach(src => {
     if (src) {
       const img = document.createElement('img');
-      img.src = src;
+      img.src = src.trim();
       img.alt = modalTitle.textContent;
       img.className = 'modal-gallery-img';
       modalGallery.appendChild(img);
@@ -367,42 +355,18 @@ function buildGallery(photos) {
   });
 }
 
-function openModal(item, legacyId) {
-  // Try data-attributes first
-  if (item && item.dataset.title) {
-    modalCat.textContent   = item.dataset.cat   || '';
-    modalTitle.textContent = item.dataset.title  || '';
-    modalYear.textContent  = item.dataset.year   || '';
-    modalDesc.textContent  = item.dataset.desc   || '';
-    modalLink.href         = item.dataset.link   || '#';
+function openModal(projectData) {
+  if (!projectData) return;
+  modalCat.textContent   = projectData.cat   || '';
+  modalTitle.textContent = projectData.title  || '';
+  modalYear.textContent  = projectData.year   || '';
+  modalDesc.textContent  = projectData.desc   || '';
+  modalLink.href         = projectData.link   || '#';
 
-    const images = item.dataset.images
-      ? item.dataset.images.split(',').map(s => s.trim())
-      : [];
-    buildGallery(images);
+  // Peida "More" nupp kui link puudub
+  modalLink.style.display = projectData.link ? 'inline-block' : 'none';
 
-  // Kringel special case (first work item, lots of images)
-  } else if (legacyId === 'project-1') {
-    const d = kringelData;
-    modalCat.textContent   = d.cat;
-    modalTitle.textContent = d.title;
-    modalYear.textContent  = d.year;
-    modalDesc.textContent  = d.desc;
-    modalLink.href         = d.link;
-    buildGallery(d.photos);
-
-  // Legacy fallback
-  } else {
-    const data = legacyProjects[legacyId];
-    if (!data) return;
-    modalCat.textContent   = data.cat;
-    modalTitle.textContent = data.title;
-    modalYear.textContent  = data.year;
-    modalDesc.textContent  = data.desc;
-    modalLink.href         = data.link || '#';
-    buildGallery(data.photos);
-  }
-
+  buildGallery(projectData.images || []);
   modal.querySelector('.modal-box').scrollTop = 0;
   modal.classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -414,18 +378,10 @@ function closeModal() {
 }
 
 document.querySelectorAll('.work-item').forEach((item, index) => {
-  const id = 'project-' + (index + 1);
-  item.dataset.modalId = id;
   item.style.cursor = 'pointer';
-  item.addEventListener('click', () => openModal(item, item.dataset.modalId));
+  item.addEventListener('click', () => openModal(projects[index]));
 });
 
 modalClose.addEventListener('click', closeModal);
-
-modal.addEventListener('click', (e) => {
-  if (e.target === modal) closeModal();
-});
-
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') closeModal();
-});
+modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
