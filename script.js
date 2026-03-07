@@ -37,7 +37,7 @@ const projects = [
     year: 'Social Media · 2025–2026',
     desc: 'Visual identity and social media content for TLÜ Kultuuriklubi — event graphics, Instagram posts, stories and promotional materials created to build a cohesive brand presence across all club events.',
     link: 'https://www.instagram.com/kultuuriklubitlu/',
-    images: ['images/kulta/insta.png','images/kulta/dj.png','images/kulta/malumang.png','images/kulta/sobrapaev.png','images/kulta/sobrapaev2.png','images/kulta/tickets.png','images/kulta/vastlapaev.png','images/kulta/bar.jpg'],
+    images: ['images/kulta/insta.png','images/kulta/malumang_aprill.png','images/kulta/dj.png','images/kulta/malumang.png','images/kulta/sobrapaev.png','images/kulta/sobrapaev2.png','images/kulta/tickets.png','images/kulta/vastlapaev.png','images/kulta/bar.jpg'],
   },
   {
     id: 'zine',
@@ -68,54 +68,27 @@ const projects = [
 // =============================================
 //  CONSOLE TEXT EFFECT (about section name)
 // =============================================
-function consoleText(words, id, colors) {
-  if (colors === undefined) colors = ['#0a0a0a'];
-  var visible = true;
-  var con = document.getElementById('console');
-  var letterCount = 1;
-  var x = 1;
-  var waiting = false;
-  var target = document.getElementById(id);
-
+function consoleText(word, id, color) {
+  const target = document.getElementById(id);
+  const con = document.getElementById('console');
   if (!target || !con) return;
 
-  target.setAttribute('style', 'color:' + colors[0]);
+  target.setAttribute('style', 'color:' + color);
 
-  window.setInterval(function () {
-    if (letterCount === 0 && waiting === false) {
-      waiting = true;
-      target.innerHTML = words[0].substring(0, letterCount);
-      window.setTimeout(function () {
-        var usedColor = colors.shift();
-        colors.push(usedColor);
-        var usedWord = words.shift();
-        words.push(usedWord);
-        x = 1;
-        target.setAttribute('style', 'color:' + colors[0]);
-        letterCount += x;
-        waiting = false;
-      }, 1000);
-    } else if (letterCount === words[0].length + 1 && waiting === false) {
-      waiting = true;
-      window.setTimeout(function () {
-        x = -1;
-        letterCount += x;
-        waiting = false;
-      }, 1000);
-    } else if (waiting === false) {
-      target.innerHTML = words[0].substring(0, letterCount);
-      letterCount += x;
+  let letterCount = 0;
+
+  const typing = window.setInterval(function () {
+    letterCount++;
+    target.innerHTML = word.substring(0, letterCount);
+    if (letterCount === word.length) {
+      clearInterval(typing);
     }
   }, 120);
 
+  let visible = true;
   window.setInterval(function () {
-    if (visible === true) {
-      con.className = 'console-underscore hidden';
-      visible = false;
-    } else {
-      con.className = 'console-underscore';
-      visible = true;
-    }
+    con.className = visible ? 'console-underscore hidden' : 'console-underscore';
+    visible = !visible;
   }, 400);
 }
 
@@ -127,15 +100,11 @@ if (aboutSection) {
     entries.forEach(entry => {
       if (entry.isIntersecting && !consoleStarted) {
         consoleStarted = true;
-        consoleText(
-          ['MERILI', 'CREATIVE', 'DESIGNER'],
-          'text',
-          ['#ff2d78', '#0a0a0a', '#ff2d78']
-        );
+        consoleText('MERILI', 'text', '#ff2d78');
         consoleObserver.disconnect();
       }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.2 });
 
   consoleObserver.observe(aboutSection);
 }
@@ -285,12 +254,23 @@ if (window.innerWidth > 900) {
 
   document.querySelectorAll('.skills-ticker').forEach(el => {
     el.addEventListener('mouseenter', () => {
+      dot.style.background   = '#ff2d78';
+      ring.style.borderColor = '#ff2d78';
+    });
+    el.addEventListener('mouseleave', () => {
       dot.style.background   = '#0a0a0a';
       ring.style.borderColor = '#0a0a0a';
     });
-    el.addEventListener('mouseleave', () => {
+  });
+
+  document.querySelectorAll('#projectModal').forEach(el => {
+    el.addEventListener('mouseenter', () => {
       dot.style.background   = '#ff2d78';
       ring.style.borderColor = '#ff2d78';
+    });
+    el.addEventListener('mouseleave', () => {
+      dot.style.background   = '#0a0a0a';
+      ring.style.borderColor = '#0a0a0a';
     });
   });
 
@@ -305,6 +285,28 @@ if (window.innerWidth > 900) {
     });
   });
 
+  document.querySelectorAll('.about-right').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      dot.style.background   = '#0a0a0a';
+      ring.style.borderColor = '#0a0a0a';
+    });
+    el.addEventListener('mouseleave', () => {
+      dot.style.background   = '#ff2d78';
+      ring.style.borderColor = '#ff2d78';
+    });
+  });
+
+  document.querySelectorAll('.contact').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      dot.style.background   = '#ff2d78';
+      ring.style.borderColor = '#ff2d78';
+    });
+    el.addEventListener('mouseleave', () => {
+      dot.style.background   = '#0a0a0a';
+      ring.style.borderColor = '#0a0a0a';
+    });
+  });
+  
   const lightSections = document.querySelectorAll('.work, .about, .education');
   const darkSections  = document.querySelectorAll('.hero, .services, .contact');
 
@@ -375,6 +377,8 @@ function openModal(projectData) {
 function closeModal() {
   modal.classList.remove('open');
   document.body.style.overflow = '';
+  modal.querySelector('.modal-box').scrollTop = 0;
+  modal.querySelector('.modal-gallery').scrollLeft = 0;
 }
 
 document.querySelectorAll('.work-item').forEach((item, index) => {
