@@ -61,7 +61,7 @@ const projects = [
     cat: 'POSTERS',
     year: 'Posters · 2025',
     desc: 'I made these in between everything else, just messing around with type and colour when I felt like it. No deadline, no feedback, no stress.',
-    images: ['images/poster/mind.png','../../roast_levels.png','../../bored.png','../../scared.png'],
+    images: ['images/poster/mind.png','images/poster/roast_levels.png','images/poster/bored.png','images/poster/scared.png'],
   },
 ];
 
