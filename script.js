@@ -44,7 +44,7 @@ const projects = [
     title: 'Zine Poster',
     cat: 'POSTERS',
     year: 'Poster · 2025',
-    desc: 'A poster created for a local zine, exploring themes of identity and self-expression through bold typography and vibrant colors.',
+    desc: 'This was one of my first projects in Photoshop, where I explored a wide range of techniques to develop my skills and expand my understanding of digital design. My goal was to experiment freely, learn from the process, and challenge myself with new creative approaches.',
     images: ['images/poster/zine.png','images/poster/zine/zine_1.png','images/poster/zine/zine_2.png','images/poster/zine/zine_3.png','images/poster/zine/zine_4.png','images/poster/zine/zine_5.png','images/poster/zine/zine_6.png','images/poster/zine/zine_7.png','images/poster/zine/zine_8.png'],
   },
   {
