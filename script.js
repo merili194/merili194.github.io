@@ -8,9 +8,6 @@ window.addEventListener('load', () => {
   setTimeout(() => window.scrollTo({ top: 0, left: 0, behavior: 'instant' }), 0);
 });
 
-// =============================================
-//  ALL PROJECT DATA — edit here only
-// =============================================
 const projects = [
   {
     id: 'kringel',
@@ -48,14 +45,6 @@ const projects = [
     link: null,
   },
   {
-    id: 'zine',
-    title: 'Zine Poster',
-    cat: 'POSTERS',
-    year: 'Poster · 2025',
-    desc: 'This was one of my first projects in Photoshop, where I explored a wide range of techniques to develop my skills and expand my understanding of digital design. My goal was to experiment freely, learn from the process, and challenge myself with new creative approaches.',
-    images: ['images/poster/zine.png','images/poster/zine/zine_1.png','images/poster/zine/zine_2.png','images/poster/zine/zine_3.png','images/poster/zine/zine_4.png','images/poster/zine/zine_5.png','images/poster/zine/zine_6.png','images/poster/zine/zine_7.png','images/poster/zine/zine_8.png'],
-  },
-  {
     id: 'posters-for-fun',
     title: 'Posters for Fun',
     cat: 'POSTERS',
@@ -65,9 +54,7 @@ const projects = [
   },
 ];
 
-// =============================================
-//  CONSOLE TEXT EFFECT (about section name)
-// =============================================
+
 function consoleText(word, id, color) {
   const target = document.getElementById(id);
   const con = document.getElementById('console');
@@ -109,9 +96,6 @@ if (aboutSection) {
   consoleObserver.observe(aboutSection);
 }
 
-// =============================================
-//  DATE — fills every .date element
-// =============================================
 function formatDate(d) {
   return d.toLocaleDateString('en-US', {
     month: 'short',
@@ -128,9 +112,7 @@ const aboutDateEl = document.getElementById('about-date');
 if (todayDateEl) todayDateEl.textContent = todayStr;
 if (aboutDateEl) aboutDateEl.textContent = todayStr;
 
-// =============================================
-//  WORK FILTER
-// =============================================
+
 const filterBtns = document.querySelectorAll('.filter-btn');
 const workItems  = document.querySelectorAll('.work-item');
 
