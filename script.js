@@ -33,7 +33,7 @@ const projects = [
     year: 'Social Media · 2025–2026',
     desc: 'Visual identity and social media content for TLÜ Kultuuriklubi — event graphics, Instagram posts, stories and promotional materials created to build a cohesive brand presence across all club events.',
     link: 'https://www.instagram.com/kultuuriklubitlu/',
-    images: ['images/kulta/insta.png','images/kulta/malumang_aprill.png','images/kulta/boiler.jpg','images/kulta/dj.png','images/kulta/malumang.png','images/kulta/sobrapaev.png','images/kulta/sobrapaev2.png','images/kulta/tickets.png','images/kulta/vastlapaev.png','images/kulta/bar.jpg'],
+    images: ['images/kulta/longpong.png','images/kulta/boiler-dj.jpg','images/kulta/insta.png','images/kulta/malumang_aprill.png','images/kulta/boiler.jpg','images/kulta/dj.png','images/kulta/malumang.png','images/kulta/sobrapaev.png','images/kulta/sobrapaev2.png','images/kulta/tickets.png','images/kulta/vastlapaev.png','images/kulta/bar.jpg'],
   },
   {
     id: 'coca-cola',
